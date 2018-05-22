@@ -39,7 +39,8 @@ public class HeroRabit : MonoBehaviour
 			sr.flipX = (movingAxisValue < 0 ? true : false);
 		}
 
-		anim.SetBool("isMoving", (Mathf.Abs(rb2D.velocity.x) < 0.05f));
+		anim.SetBool("isMoving", (Mathf.Abs(rb2D.velocity.x) > 0.1f));
+		anim.SetBool("isGrounded", (Mathf.Abs(rb2D.velocity.y) < 0.1f));
 
 		if (transform.position.y < deathPoint.position.y) anim.SetBool("isDead", true);
 	}
