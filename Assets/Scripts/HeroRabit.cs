@@ -5,7 +5,7 @@ using UnityEngine;
 public class HeroRabit : MonoBehaviour
 {
 	public float speed = 30f;
-	public float deathOffset;
+	public Transform deathPoint = null;
 
 	private float movingAxisValue;
 	private Rigidbody2D rb2D;
@@ -17,10 +17,12 @@ public class HeroRabit : MonoBehaviour
 		rb2D = this.GetComponent<Rigidbody2D>();
 		sr = this.GetComponent<SpriteRenderer>();
 		anim = this.GetComponent<Animator>();
+		deathPoint = GameObject.FindWithTag("DeathPoint").transform;
 
 		if (rb2D == null) Debug.LogError("No Rigidbody2D component found attached to this Player gameObject! [HERO_RABIT.CS]");
 		if (sr == null)	Debug.LogError("No SpriteRenderer component found attached to this Player gameObject! [HERO_RABIT.CS]");
 		if (anim == null) Debug.LogError("No Animator component found attached to this Player gameObject! [HERO_RABIT.CS]");
+		if (deathPoint == null) Debug.LogError("No DeathPoint gameObject found! [HERO_RABIT.CS]");
 	}
 
 	void FixedUpdate ()
@@ -38,8 +40,7 @@ public class HeroRabit : MonoBehaviour
 		}
 
 		anim.SetBool("isMoving", (Mathf.Abs(rb2D.velocity.x) < 0.05f));
-		anim.SetBool("isGrounded", (Mathf.Abs(rb2D.velocity.y) < 0.05f));
 
-		if (transform.position.y < deathOffset) anim.SetTrigger("isDead");
+		if (transform.position.y < deathPoint.position.y) anim.SetBool("isDead", true);
 	}
 }
