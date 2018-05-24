@@ -10,10 +10,7 @@ public class HeroFollow : MonoBehaviour
 	{
 		player = GameObject.FindWithTag("Player").GetComponent<HeroRabit>();
 
-		if (player == null)
-		{
-			Debug.LogError("No gameObject with the HeroRabit component found in the scene! [HERO_FOLLOW.CS]");
-		}
+		if (player == null)	Debug.LogError("No gameObject with the HeroRabit component found in the scene! [HERO_FOLLOW.CS]");
 	}
 
 	void Update ()

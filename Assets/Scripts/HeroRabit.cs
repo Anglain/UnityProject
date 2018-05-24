@@ -33,7 +33,7 @@ public class HeroRabit : MonoBehaviour
 
 		if (Mathf.Abs(movingAxisValue) > 0)
 		{
-			rb2D.velocity = new Vector2(movingAxisValue * speed * Time.deltaTime * 100f, rb2D.velocity.y);
+			rb2D.velocity = new Vector2(movingAxisValue * speed * Time.deltaTime * 10f, rb2D.velocity.y);
 		}
 
 		if (movingAxisValue != 0)
