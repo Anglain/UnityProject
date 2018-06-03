@@ -6,13 +6,16 @@ public class HeroRabit : MonoBehaviour
 {
 	public float speed = 3f;
 	public float jumpForce = 5f;
-	public Transform deathPoint = null;
+	public Transform deathPoint;
+	public LayerMask whatIsGround;
+	public Transform ground;
 
 	private float movingAxisValue;
 	private bool isGrounded = true;
 	private Rigidbody2D rb2D;
 	private SpriteRenderer sr;
 	private Animator anim;
+	private Transform heroParent;
 
 	void Start ()
 	{
@@ -25,6 +28,9 @@ public class HeroRabit : MonoBehaviour
 		if (sr == null)	Debug.LogError("No SpriteRenderer component found attached to this Player gameObject! [HERO_RABIT.CS]");
 		if (anim == null) Debug.LogError("No Animator component found attached to this Player gameObject! [HERO_RABIT.CS]");
 		if (deathPoint == null) Debug.LogError("No DeathPoint gameObject found! [HERO_RABIT.CS]");
+		if (ground == null) Debug.LogError("No ground assigned to player! [HERO_RABIT.CS]");
+
+		this.heroParent = this.transform.parent;
 	}
 
 	void FixedUpdate ()
@@ -38,14 +44,13 @@ public class HeroRabit : MonoBehaviour
 
 		if (movingAxisValue != 0)
 		{
-			sr.flipX = (movingAxisValue < 0 ? true : false);
+			sr.flipX = (movingAxisValue < 0);
 		}
 
 		if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded)
 		{
 			rb2D.AddForce(Vector2.up * jumpForce * 100f);
 			isGrounded = false;
-			Debug.Log("Adding force!");
 		}
 
 		if (!isGrounded) isGrounded = Mathf.Abs(rb2D.velocity.y) < 0.1f;
@@ -53,6 +58,27 @@ public class HeroRabit : MonoBehaviour
 		anim.SetBool("isMoving", (Mathf.Abs(rb2D.velocity.x) > 0.1f));
 		anim.SetBool("isGrounded", isGrounded);
 
+		RaycastHit2D hit = Physics2D.Linecast(transform.position, ground.position, whatIsGround);
+
+		if(hit) {
+			if(hit.transform != null && hit.transform.GetComponent<MovingPlatform>() != null)
+			{
+				SetNewParent(this.transform, hit.transform);
+			}
+		}
+		else
+		{
+			SetNewParent(this.transform, this.heroParent);
+		}
+
 		if (transform.position.y < deathPoint.position.y) anim.SetBool("isDead", true);
+	}
+
+	static void SetNewParent(Transform obj, Transform new_parent) {
+		if(obj.transform.parent != new_parent) {
+			Vector3 pos = obj.transform.position;
+			obj.transform.parent = new_parent;
+			obj.transform.position = pos;
+		}
 	}
 }

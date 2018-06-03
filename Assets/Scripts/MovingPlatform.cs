@@ -41,7 +41,6 @@ public class MovingPlatform : MonoBehaviour {
 		Vector3 destination = my_pos + moveVector;
 
 		destination.z = 0;
-		Debug.Log(destination);
 
 		this.transform.position = destination;
 
