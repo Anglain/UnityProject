@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4966130979460352}
   - component: {fileID: 212564508645617074}
   - component: {fileID: 68498629371024962}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Platform-14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 1}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -1, y: 0}
+  - {x: -1, y: -2}
   - {x: 1, y: 0}
 --- !u!212 &212564508645617074
 SpriteRenderer:
