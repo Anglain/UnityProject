@@ -98,14 +98,14 @@ public class HeroRabit : MonoBehaviour
 
 	private void Jump()
 	{
-		if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded)
+		if ((Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded)
 		{
 			jumpActive = true;
 		}
 
 		if (jumpActive)
 		{
-			if (Input.GetButton("Jump") || (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)))
+			if (Input.GetButton("Jump") || (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
 			{
 				jumpTime += Time.fixedDeltaTime;
 				if (jumpTime < maxJumpTime)

@@ -11,7 +11,7 @@ public class LevelController : MonoBehaviour {
 	private int money;
 
 	void Awake() {
-		if (lc = null)
+		if (lc == null)
 			lc = this;
 
 		if (lc != this)
