@@ -18,20 +18,15 @@ public class HeroFollow : MonoBehaviour
 		if (upperBound == null) Debug.LogError("No upperBound gameObject found attached to this gameObject! [HERO_FOLLOW.CS]");
 	}
 
-	void Update ()
+	void LateUpdate ()
 	{
 		Vector3 newCameraPosition = new Vector3(player.transform.position.x, player.transform.position.y, -10);
 
-		if (Camera.main.transform.position.y > upperBound.position.y)
-		{
-			newCameraPosition.y = Camera.main.transform.position.y;
-		}
+		if (newCameraPosition.y > upperBound.position.y)
+			newCameraPosition.y = transform.position.y;
+		else if (newCameraPosition.y < lowerBound.position.y)
+			newCameraPosition.y = transform.position.y;
 
-		if (Camera.main.transform.position.y < lowerBound.position.y)
-		{
-			newCameraPosition.y = Camera.main.transform.position.y;
-		}
-
-		Camera.main.transform.position = newCameraPosition;
+		transform.position = newCameraPosition;
 	}
 }

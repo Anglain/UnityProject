@@ -130,6 +130,10 @@ public class HeroRabit : MonoBehaviour
 			{
 				SetNewParent(this.transform, hit.transform);
 			}
+			else
+			{
+				SetNewParent(this.transform, this.heroParent);
+			}
 		}
 		else
 		{
