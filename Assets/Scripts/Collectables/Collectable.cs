@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {
+	public Animation hideAnimation;
+
 	protected virtual void OnRabitHit(HeroRabit rabit) {}
 
 	void OnTriggerEnter2D(Collider2D collider)
 	{
-		// if(!this.hideAnimation)
-		// {
-		// 	HeroRabit rabit = collider.GetComponent<HeroRabit>();
-		// 	if(rabit != null)
-		// 	{
-		// 		this.OnRabitHit (rabit);
-		// 	}
-		// }
+		if(!this.hideAnimation)
+		{
+			HeroRabit rabit = collider.GetComponent<HeroRabit>();
+			if(rabit != null)
+			{
+				this.OnRabitHit (rabit);
+			}
+		}
 	}
 
 	public void CollectedHide()

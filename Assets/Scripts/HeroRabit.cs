@@ -9,8 +9,23 @@ public class HeroRabit : MonoBehaviour
 	public Transform deathPoint;
 	public AnimationClip deathAnimation;
 	public LayerMask whatIsGround;
-	public float maxJumpTime = 0.5f;
+	public float maxJumpTime = 1f;
 	public float jumpSpeed = 4f;
+
+	private bool _isBig = false;
+	public bool isBig
+	{
+		get
+		{
+			return _isBig;
+		}
+		set
+		{
+			if (value) transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+			else transform.localScale = new Vector3(1f, 1f, 1f);
+			_isBig = value;
+		}
+	}
 
 	private float movingAxisValue;
 	private float jumpTime = 0f;
@@ -42,6 +57,7 @@ public class HeroRabit : MonoBehaviour
 
 	void FixedUpdate ()
 	{
+
 		Vector3 castFrom = transform.position + Vector3.up * 0.3f;
 		Vector3 castTo = transform.position + Vector3.down * 0.2f;
 
@@ -69,16 +85,11 @@ public class HeroRabit : MonoBehaviour
 				//transform.position = Vector3.up;
 				transform.position = LevelController.current.spawnPoint.position;
 			}
-
-			Debug.Log(currentDeathAnimTime);
 		}
 
 		if (transform.position.y < deathPoint.position.y && !isDead)
 		{
-			isDead = true;
-			anim.SetBool("isDead", isDead);
-			currentDeathAnimTime = deathAnimation.length;
-			Debug.Log(currentDeathAnimTime);
+			RabitDie();
 		}
 	}
 
@@ -148,5 +159,13 @@ public class HeroRabit : MonoBehaviour
 			obj.transform.parent = new_parent;
 			obj.transform.position = pos;
 		}
+	}
+
+	public void RabitDie()
+	{
+		isDead = true;
+		anim.SetBool("isDead", isDead);
+		currentDeathAnimTime = deathAnimation.length;
+		LevelController.current.RemoveLife();
 	}
 }
