@@ -66,7 +66,8 @@ public class HeroRabit : MonoBehaviour
 			{
 				isDead = false;
 				anim.SetBool("isDead", isDead);
-				transform.position = Vector3.up;
+				//transform.position = Vector3.up;
+				transform.position = LevelController.current.spawnPoint.position;
 			}
 
 			Debug.Log(currentDeathAnimTime);

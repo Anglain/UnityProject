@@ -8,14 +8,14 @@ public class Collectable : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D collider)
 	{
-		if(!this.hideAnimation)
-		{
-			HeroRabit rabit = collider.GetComponent<HeroRabit>();
-			if(rabit != null)
-			{
-				this.OnRabitHit (rabit);
-			}
-		}
+		// if(!this.hideAnimation)
+		// {
+		// 	HeroRabit rabit = collider.GetComponent<HeroRabit>();
+		// 	if(rabit != null)
+		// 	{
+		// 		this.OnRabitHit (rabit);
+		// 	}
+		// }
 	}
 
 	public void CollectedHide()
