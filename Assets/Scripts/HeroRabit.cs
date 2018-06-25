@@ -167,5 +167,6 @@ public class HeroRabit : MonoBehaviour
 		anim.SetBool("isDead", isDead);
 		currentDeathAnimTime = deathAnimation.length;
 		LevelController.current.RemoveLife();
+		/** TODO do something when lives go zero */
 	}
 }
